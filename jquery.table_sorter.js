@@ -1,5 +1,5 @@
 /**
-* SimpleTableSorter v1.0.1 | (c) 2014 webtischlerei
+* SimpleTableSorter v1.0.1 | (c) 2014 Christian Kehres
 * 
 * Diese Funktion ermöglicht das Sortieren einer Tabelle per Klick auf einen Link / Button / etc
 *
