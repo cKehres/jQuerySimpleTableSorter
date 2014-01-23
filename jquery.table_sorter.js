@@ -1,9 +1,9 @@
 /**
-* SimpleTableSorter v1.1.0 | (c) 2014 Christian Kehres
+* SimpleTableSorter v1.2.0 | (c) 2014 Christian Kehres
 * 
-* Diese Funktion ermöglicht das Sortieren einer Tabelle per Klick auf einen Link / Button / etc
+* Diese Funktion ermöglicht das Sortieren einer Tabelle per Klick auf einen jedes erdenkliche Element
 *
-* Der Link / Button / etc muss folgende Eigenschaften haben:
+* Das Element muss folgende Data-Attribute besitzen:
 * data-table-sorter-table="#table" // Hiermit gibt man an die ID der Tabelle an welche sortiert werden soll
 * data-table-sorter-col="1" // Hier nach welcher Spalte sortiert werden soll
 * data-table-sorter-order="desc" // Und hier gibt man an in welche Richtung sortiert werden soll (asc oder desc)
@@ -12,28 +12,24 @@
 * <a href="#" data-table-sorter-table="#table" data-table-sorter-col="1" data-table-sorter-order="desc">Name</a>
 */
 jQuery(function($) {
-	$("[data-table-sorter-table]").click(function(e) {
-		e.preventDefault();
+	$("[data-table-sorter-table]").on('click', function() {
+		event.preventDefault();
 
-		var table = $(this).data('table-sorter-table');
-		var col = $(this).data('table-sorter-col');
-		var order = $(this).data('table-sorter-order');
+		var sort_col = $(this).data('table-sorter-col')-1;
+		var sort_order = $(this).data('table-sorter-order');
 
-		var table_body = $(table).children('tbody');
+		var table_body = $($(this).data('table-sorter-table')).children('tbody');
+		var table_body_rows = $('tr', table_body).get();
 
-		var rows = $('tr', table_body).get();
-
-		rows.sort(function(a, b) {
-			var A = $(a).children('td').eq(col-1).text().toUpperCase();
-			var B = $(b).children('td').eq(col-1).text().toUpperCase();
+		table_body_rows.sort(function(a, b) {
+			var A = $(a).children('td').eq(sort_col).text().toLowerCase();
+			var B = $(b).children('td').eq(sort_col).text().toLowerCase();
 			
-			return A < B ? (order == 'asc' ? -1 : 1) : (A > B ? (order == 'asc' ? 1 : -1) : 0);
+			return A < B ? (sort_order == 'asc' ? -1 : 1) : (A > B ? (sort_order == 'asc' ? 1 : -1) : 0);
 		});
 		
-		$.each(rows, function(index, row) {
-			$(table_body).append(row);
-		});
-
-		$(this).data('table-sorter-order', order == 'asc' ? 'desc' : 'asc');
+		table_body.append(table_body_rows);
+		
+		$(this).data('table-sorter-order', sort_order == 'asc' ? 'desc' : 'asc');
 	});
 });
