@@ -1,7 +1,7 @@
 /**
 * SimpleTableSorter v1.2.0 | (c) 2014 Christian Kehres
 * 
-* Diese Funktion ermöglicht das Sortieren einer Tabelle per Klick auf ein jedes erdenkliches Element
+* Diese Funktion ermöglicht das Sortieren einer Tabelle per Klick auf ein jedes erdenkliche Element
 *
 * Das Element muss folgende Data-Attribute besitzen:
 * data-table-sorter-table="#table" // Hiermit gibt man an die ID der Tabelle an welche sortiert werden soll
