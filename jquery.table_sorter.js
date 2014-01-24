@@ -1,5 +1,5 @@
 /**
-* SimpleTableSorter v1.2.1 | (c) 2014 Christian Kehres
+* SimpleTableSorter v1.3.0 | (c) 2014 Christian Kehres
 * 
 * Diese Funktion ermöglicht das Sortieren einer Tabelle per Klick auf ein jedes erdenkliche Element
 *
@@ -24,6 +24,9 @@ jQuery(function($) {
 		table_body_rows.sort(function(a, b) {
 			var A = $(a).children('td').eq(sort_col).text().toLowerCase();
 			var B = $(b).children('td').eq(sort_col).text().toLowerCase();
+
+			A = $.isNumeric(A) ? parseInt(A) : A;
+			B = $.isNumeric(B) ? parseInt(B) : B;
 			
 			return A < B ? (sort_order == 'asc' ? -1 : 1) : (A > B ? (sort_order == 'asc' ? 1 : -1) : 0);
 		});
